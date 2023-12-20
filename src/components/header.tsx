@@ -18,11 +18,19 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h1`
+const HomeTitle = styled.h1`
   margin: 0;
-  font-family: serif;
-  font-weight: bold;
+  font-size: var(--fontSize-7);
+  font-family: var(--font-heading);
   color: #065000;
+`;
+
+const DefaultTitle = styled(Link)`
+  color: #065000;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  text-decoration: none;
+  font-size: var(--fontSize-2);
 `;
 
 const LinksWrapper = styled.div`
@@ -35,21 +43,23 @@ const LinkItem = styled(Link)`
   text-decoration: none;
 `;
 
-const TitleLink = styled(Link)`
-  color: #065000;
-  text-decoration: none;
-`;
-
 type HeaderProps = {
-  siteTitle: string;
+  title: string;
+  isHome?: boolean;
 };
 
-export const Header = ({ siteTitle }: HeaderProps) => (
+const HeaderTitle = ({ isHome, title }: HeaderProps) => isHome ? (
+  <HomeTitle>
+    {title}
+  </HomeTitle>
+) : (
+  <DefaultTitle to={'/'}>{title}</DefaultTitle>
+)
+
+export const Header = ({ title, isHome }: HeaderProps) => (
   <HeaderWrapper>
     <HeaderContainer>
-      <TitleLink to="/">
-        <Title>{siteTitle}</Title>
-      </TitleLink>
+      <HeaderTitle title={title} isHome={isHome} />
       <LinksWrapper>
         <LinkItem to="/">Home</LinkItem>
         <LinkItem to="/about">About</LinkItem>

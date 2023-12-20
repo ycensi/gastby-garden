@@ -1,15 +1,57 @@
-import * as React from "react"
-import type { HeadFC, PageProps } from "gatsby"
-import { Header } from "../components/header"
+import React from 'react';
+import { graphql, type HeadFC, type PageProps } from 'gatsby';
+import { Header } from '../components/header';
+import { Feed } from '../components/feed';
+import { WEBSITE_NAME } from '../costants';
 
-const IndexPage: React.FC<PageProps> = () => {
+type HomePageProps = PageProps<Queries.HomePageDataQuery>;
+
+const HomePage = ({ data }: HomePageProps) => {
+  const siteTitle = data?.site?.siteMetadata?.title || WEBSITE_NAME;
+  const posts = data.allMarkdownRemark.nodes;
+
   return (
-    <main>
-      <Header siteTitle="Garden" />
-    </main>
-  )
-}
+    <div className="global-wrapper">
+      <Header title={siteTitle} isHome />
+      <main>
+        <Feed posts={posts} />
+      </main>
+      <footer>
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.com">Gatsby</a>
+      </footer>
+    </div>
+  );
+};
 
-export default IndexPage;
+export default HomePage;
 
-export const Head: HeadFC = () => <title>Garden</title>
+export const Head: HeadFC = () => <title>{WEBSITE_NAME}</title>;
+
+export const pageQuery = graphql`
+  query HomePageData {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(
+      sort: { frontmatter: { date: DESC } }
+      filter: { frontmatter: { draft: { eq: false } } }
+    ) {
+      nodes {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+          lang
+        }
+      }
+    }
+  }
+`;

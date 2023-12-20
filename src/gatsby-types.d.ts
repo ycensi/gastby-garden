@@ -2963,6 +2963,11 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: st
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
 
+type HomePageDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HomePageDataQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null, readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly excerpt: string | null, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly lang: string | null } | null }> } };
+
 type AllMarkdownRemarkQueryVariables = Exact<{ [key: string]: never; }>;
 
 

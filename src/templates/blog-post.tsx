@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
 import styled from 'styled-components';
 import { Header } from '../components/header';
+import { WEBSITE_NAME } from '../costants';
 
 const PostWrapper = styled.main`
   margin: 0 auto;
@@ -17,7 +18,7 @@ const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post },
 }: // location,
 BlogPostTemplateProps) => {
-  const siteTitle = site?.siteMetadata?.title || 'Garden';
+  const siteTitle = site?.siteMetadata?.title || WEBSITE_NAME;
 
   if (!post?.frontmatter?.title || !post?.html) {
     //redirect to 404 route
@@ -31,7 +32,7 @@ BlogPostTemplateProps) => {
 
   return (
     <div className="global-wrapper">
-      <Header siteTitle={siteTitle} />
+      <Header title={siteTitle} />
       <PostWrapper>
         <article
           className="blog-post"
