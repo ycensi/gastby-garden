@@ -1,7 +1,22 @@
-----
+---
+title: Teste
+createdAt: 2023-12-18T00:00:00.000Z
+updatedAt: 2023-12-18T00:00:00.000Z
+draft: false
+lang: en
+author: content/authors/ycensi.md
+---
 
-----
+## Isso é um teste de post
 
-# This is a Post
+*Italico*
 
-This is a post. It is written in markdown and can be styled with **bold** or *italic* text.
+**Bold**
+
+```javascript
+const a = 1;
+const b = `que
+string
+grande
+`
+```
